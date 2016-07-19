@@ -1,0 +1,76 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:w="http://www.zkoss.org/2005/zk/client"
+	xmlns:n="http://www.zkoss.org/2005/zk/native"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+	<div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.viewmodel.SelectpageVM')">
+		<grid width="400px">
+			<columns>
+				<column label="" width="397px" />
+				<column label="" />
+			</columns>
+			<rows>
+				<row style="background-color:#CCCCFF" align='center'
+					valign='middle' height='20'>
+					<n:h2>IBM Emp: Home</n:h2>
+				</row>
+				<row style="background-color:#CCCCFF" align='center'
+					valign='middle' height='20'>
+					<label value="( MVC )" style="color:red" />
+				</row>
+			</rows>
+		</grid>
+		<n:p>This is the Home page for IBM Emp: Home</n:p>
+		<n:h3>資料查詢：</n:h3>
+		<h:ul>
+			<h:li>
+				<n:font style="font-size:12pt">
+					<a href="listAllEmp.zul" style="font-size:12pt"
+						label="List" />
+					all Emps.
+				</n:font>
+			</h:li>
+			　　
+			<space />
+			<h:li>
+				<n:font style="font-size:12pt">輸入員工編號(如7001)：</n:font>
+				<textbox />
+				<button label="送出" onClick="" />
+			</h:li>
+			<h:li>
+				<n:font style="font-size:12pt">選擇員工編號：</n:font>
+				<listbox mold="select" model="@load(vm.empList)" selectedItem="@bind(vm.select_emp)">
+					<template name="model">
+						<listitem>
+							<listcell label="@load(each.empno)" />
+						</listitem>
+					</template>
+				</listbox>
+				<button label="送出" onClick="" />
+			</h:li>
+			<h:li>
+				<n:font style="font-size:12pt">選擇員工姓名：</n:font>
+					<listbox mold="select" model="@load(vm.empList)" selectedItem="@bind(vm.select_emp)">
+					<template name="model">
+						<listitem>
+							<listcell label="@load(each.ename)" />
+						</listitem>
+					</template>
+				</listbox>
+				<button label="送出" onClick="" />
+			</h:li>
+		</h:ul>
+		<n:h3>員工管理</n:h3>
+		<h:ul>
+			<h:li>
+				<n:font style="font-size:12pt">
+					<a href="addEmp.zul" style="font-size:12pt"
+						label="Add" />
+					a new Emp.
+				</n:font>
+			</h:li>
+		</h:ul>
+	</div>
+</zk>

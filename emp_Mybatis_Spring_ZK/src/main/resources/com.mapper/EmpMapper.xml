@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.EmpMapper">
+<resultMap type="Emp2VO" id="resulte">
+	<id property="empno" column="empno"/>
+	<result property="ename" column="ename"/>
+	<result property="job" column="job"/>
+	<result property="hiredate" column="hiredate"/>
+	<result property="sal" column="sal"/>
+	<result property="comm" column="comm"/>
+	<association property="deptVO" resultMap="resultDept"/>
+</resultMap>
+<resultMap type="DeptVO" id="resultDept">
+	<id property="deptno" column="deptno"/>
+	<result property="dname" column="dname"/>
+	<result property="loc" column="loc"/>
+</resultMap>
+
+<select id="getAll" resultMap="resulte">
+	SELECT empno,ename,job,hiredate,sal,comm,emp2.deptno,dept2.dname FROM emp2 LEFT OUTER JOIN dept2 ON emp2.deptno = dept2.deptno order by empno;
+</select>
+
+<select id="findByPrimaryKey" parameterType="java.lang.Integer" resultMap="resulte">
+	SELECT empno,ename,job,hiredate,sal,comm,emp2.deptno,dept2.dname FROM emp2 LEFT OUTER JOIN dept2 ON emp2.deptno = dept2.deptno where empno = #{empno};
+</select>
+
+<insert id="insert" parameterType="EmpVO" useGeneratedKeys="true" keyProperty="empno">
+	INSERT INTO emp2 (ename,job,hiredate,sal,comm,deptno) VALUES (#{ename}, #{job}, #{hiredate}, #{sal}, #{comm}, #{deptno});
+</insert>
+
+<update id="update" parameterType="EmpVO">
+	UPDATE emp2 set ename=#{ename}, job=#{job}, hiredate=#{hiredate}, sal=#{sal}, comm=#{comm}, deptno=#{deptno} where empno = #{empno};
+</update>
+
+<delete id="delete" parameterType="java.lang.Integer">
+	DELETE FROM emp2 where empno = #{empno};
+</delete>
+</mapper>

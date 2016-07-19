@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.DeptMapper">
+<resultMap type="DeptVO" id="resultd">
+	<id property="deptno" column="deptno"/>
+	<result property="dname" column="dname"/>
+	<result property="loc" column="loc"/>
+</resultMap>
+
+<resultMap type="EmpVO" id="resultEmp">
+	<result property="empno" column="empno"/>
+	<result property="ename" column="ename"/>
+	<result property="job" column="job"/>
+	<result property="hiredate" column="hiredate"/>
+	<result property="sal" column="sal"/>
+	<result property="comm" column="comm"/>
+	<result property="deptno" column="deptno"/>
+</resultMap>
+
+<select id="getAll" resultMap="resultd">
+	SELECT deptno , dname, loc FROM dept2;
+</select>
+
+<select id="findByPrimaryKey" parameterType="java.lang.Integer" resultType="DeptVO">
+	SELECT deptno , dname, loc FROM dept2 where deptno = #{deptno};
+</select>
+
+<select id="getEmpsByDeptno" parameterType="java.lang.Integer" resultMap="resultEmp">
+	SELECT empno ,ename,job,hiredate,sal,comm,deptno FROM emp2 where deptno = #{deptno} order by empno;
+</select>
+
+<insert id="insert" parameterType="DeptVO" useGeneratedKeys="true" keyProperty="deptno">
+	INSERT INTO dept2 (dname,loc) VALUES (#{dname}, #{loc});
+</insert>
+
+<update id="update" parameterType="DeptVO">
+	UPDATE dept2 set dname=#{dname}, loc=#{loc} where deptno = #{deptno};
+</update>
+
+<delete id="deleteEmpByDept" parameterType="java.lang.Integer">
+	DELETE FROM emp2 where deptno = #{deptno};
+</delete>
+
+<delete id="delete" parameterType="java.lang.Integer">
+	DELETE FROM dept2 where deptno = #{deptno};
+</delete>
+</mapper>
