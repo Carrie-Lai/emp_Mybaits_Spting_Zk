@@ -11,4 +11,5 @@ public interface EmpDAO_interface {
           public void delete(Integer empno);
           public Emp2VO findByPrimaryKey(Integer empno);
           public List<Emp2VO> getAll();
+          public List<Emp2VO> getAllByPage(Integer offset,Integer limit);
 }

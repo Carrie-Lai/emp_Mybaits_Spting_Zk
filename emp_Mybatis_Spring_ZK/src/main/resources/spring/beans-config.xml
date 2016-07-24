@@ -1,26 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
-	xsi:schemaLocation="http://www.springframework.org/schema/context 
-	http://www.springframework.org/schema/context/spring-context.xsd
-     http://www.springframework.org/schema/beans 
-     http://www.springframework.org/schema/beans/spring-beans.xsd
-     http://www.springframework.org/schema/tx 
-     http://www.springframework.org/schema/tx/spring-tx.xsd 
-     http://www.springframework.org/schema/aop 
-     http://www.springframework.org/schema/aop/spring-aop.xsd 
-     http://www.springframework.org/schema/jdbc 
-     http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+     http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
 
 	<context:annotation-config/>
-	<context:component-scan base-package="com.service,com.dao,com.viewmodel" />
+	<context:component-scan base-package="com.mapper,com.service,com.dao,com.viewmodel" />
 
 	<tx:annotation-driven />
 
-	<bean id="empDS" class="org.apache.commons.dbcp.BasicDataSource"
-		destroy-method="close">
+	<bean id="empDS" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/db01" />
 		<property name="username" value="root" />

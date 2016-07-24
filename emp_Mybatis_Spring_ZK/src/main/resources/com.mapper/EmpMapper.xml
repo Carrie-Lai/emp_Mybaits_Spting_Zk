@@ -22,6 +22,10 @@
 	SELECT empno,ename,job,hiredate,sal,comm,emp2.deptno,dept2.dname FROM emp2 LEFT OUTER JOIN dept2 ON emp2.deptno = dept2.deptno order by empno;
 </select>
 
+<select id="getAllByPage" resultMap="resulte">
+	SELECT empno,ename,job,hiredate,sal,comm,emp2.deptno,dept2.dname FROM emp2 LEFT OUTER JOIN dept2 ON emp2.deptno = dept2.deptno order by empno LIMIT #{offset},#{limit};
+</select>
+
 <select id="findByPrimaryKey" parameterType="java.lang.Integer" resultMap="resulte">
 	SELECT empno,ename,job,hiredate,sal,comm,emp2.deptno,dept2.dname FROM emp2 LEFT OUTER JOIN dept2 ON emp2.deptno = dept2.deptno where empno = #{empno};
 </select>

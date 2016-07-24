@@ -7,6 +7,8 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.domain.DeptVO;
@@ -14,9 +16,10 @@ import com.domain.EmpVO;
 import com.mapper.DeptMapper;
 
 @Repository
+@Qualifier("deptDAO")
 public class DeptDAO implements DeptDAO_interface {
 	
-	@Resource
+	@Autowired
 	private DeptMapper deptMapper;
 	
 	@Override

@@ -1,0 +1,53 @@
+<?page title="員工資料 - ListOneEmp.zul" contentType="text/html;charset=UTF-8"?>
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:w="http://www.zkoss.org/2005/zk/client"
+	xmlns:n="http://www.zkoss.org/2005/zk/native"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+	<style>
+		.z-row:hover > .z-row-inner, .z-row:hover > .z-cell
+		{background:white; !important}
+
+	</style>
+<div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.viewmodel.SelectoneVM')">
+		<grid width="600px">
+			<columns>
+				<column/>
+			</columns>
+			<rows>
+				<row style="background-color:#CCCCFF" align='center'
+					valign='middle' height='20'>
+					<n:h2>員工資料 - ListOneEmp.zul</n:h2>
+				</row>
+				<row style="background-color:#CCCCFF" align='center'
+					valign='middle' height='20'>
+					<a href="select_page.zul" style="font-size:12pt"><image src="images/back1.gif" width="100" height="32"/>回首頁</a>
+				</row>
+			</rows>
+		</grid>
+		<grid width="600px">
+		<columns>
+			<column label="員工編號"/>
+			<column label="員工姓名"/>
+			<column label="職位"/>
+			<column label="雇用日期"/>
+			<column label="薪水"/>
+			<column label="獎金"/>
+			<column label="部門"/>
+		</columns>
+		<rows>
+			<row>
+				<label value="@load(vm.select_emp.empno)"/>
+				<label value="@load(vm.select_emp.ename)"/>
+				<label value="@load(vm.select_emp.job)"/>
+				<label value="@load(vm.select_emp.hiredate)"/>
+				<label value="@load(vm.select_emp.sal)"/>
+				<label value="@load(vm.select_emp.comm)"/>
+				<label value="@load(vm.select_emp.deptVO.dname)"/>
+			</row>
+		</rows>
+	</grid>
+
+</div>
+</zk>

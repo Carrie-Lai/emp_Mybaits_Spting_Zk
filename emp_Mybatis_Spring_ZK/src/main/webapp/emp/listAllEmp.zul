@@ -1,0 +1,73 @@
+<?page title="所有員工資料 - ListAllEmp.zul" contentType="text/html;charset=UTF-8"?>
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:w="http://www.zkoss.org/2005/zk/client"
+	xmlns:n="http://www.zkoss.org/2005/zk/native"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+	<style>
+		.z-listitem:hover > .z-listitem-inner, .z-listitem:hover >
+		.z-listcell {background:white; !important} .z-row:hover >
+		.z-row-inner, .z-row:hover > .z-cell {background:white;
+		!important}
+	</style>
+	<div apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.viewmodel.ListallempVM')">
+		<grid width="800px">
+			<columns>
+				<column />
+			</columns>
+			<rows>
+				<row style="background-color:#CCCCFF" align='center'
+					valign='middle' height='20'>
+					<n:h2>所有員工資料 - ListAllEmp.zul</n:h2>
+				</row>
+				<row style="background-color:#CCCCFF" align='center'
+					valign='middle' height='20'>
+					<a href="select_page.zul" style="font-size:12pt">
+						<image src="images/back1.gif" width="100"
+							height="32" />
+						回首頁
+					</a>
+				</row>
+			</rows>
+		</grid>
+		<div>
+		<n:b>●符 合 查 詢 條 件 如 下 所 示: 共<label value="@load(vm.totalSize)" style="color:red"/>筆</n:b>
+			<paging width="800px" pageSize="@load(vm.pageSize)"
+				totalSize="@load(vm.totalSize)" activePage="@bind(vm.activePage)" />
+			<listbox width="800px" model="@load(vm.empList)" zclass="none">
+				<listhead>
+					<listheader label="員工編號" />
+					<listheader label="員工姓名" />
+					<listheader label="職位" />
+					<listheader label="雇用日期" />
+					<listheader label="薪水" />
+					<listheader label="獎金" />
+					<listheader label="部門" />
+					<listheader label="修改" />
+					<listheader label="刪除" />
+				</listhead>
+				<template name="model">
+					<listitem>
+						<listcell label="@load(each.empno)" />
+						<listcell label="@load(each.ename)" />
+						<listcell label="@load(each.job)" />
+						<listcell label="@load(each.hiredate)" />
+						<listcell label="@load(each.sal)" />
+						<listcell label="@load(each.comm)" />
+						<listcell label="@load(each.deptVO.dname)" />
+						<listcell>
+							<button label="修改" onClick="@command('update',empno=each.empno)" />
+						</listcell>
+						<listcell>
+							<button label="刪除" onClick="@command('delete',empno=each.empno)"/>
+						</listcell>
+					</listitem>
+				</template>
+			</listbox>
+		</div>
+
+
+	</div>
+</zk>

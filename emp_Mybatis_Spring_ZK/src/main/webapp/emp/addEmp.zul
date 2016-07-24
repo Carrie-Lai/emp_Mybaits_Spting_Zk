@@ -1,0 +1,106 @@
+<?page title="員工資料新增 - addEmp.zul" contentType="text/html;charset=UTF-8"?>
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:w="http://www.zkoss.org/2005/zk/client"
+	xmlns:n="http://www.zkoss.org/2005/zk/native"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+	<style>
+		.z-row:hover > .z-row-inner, .z-row:hover > .z-cell
+		{background:white; !important}
+
+	</style>
+
+	<div apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.viewmodel.AddempVM')" validationMessages="@id('vmsgs')">
+		<grid width="500px">
+			<columns>
+				<column />
+			</columns>
+			<rows>
+				<row style="background-color:#CCCCFF" align='center'
+					valign='middle' height='20'>
+					<cell>
+						<n:h2>員工資料新增 - addEmp.zul</n:h2>
+					</cell>
+					<cell>
+						<a href="select_page.zul"
+							style="font-size:12pt">
+							<image src="images/tomcat.gif" width="100"
+								height="100" />
+							回首頁
+						</a>
+					</cell>
+				</row>
+			</rows>
+		</grid>
+		<n:h3>資料員工：</n:h3>
+		<grid zclass="none" width="500px"
+			form="@id('fx') @load(vm.empVO) @save(vm.empVO,before='submit') @validator(vm.formValidator)">
+			<columns>
+				<column align="left" hflex="min" />
+				<column />
+			</columns>
+			<rows>
+				<row>
+					<cell>員工姓名：</cell>
+					<cell>
+						<textbox value="@bind(fx.ename)" />
+						<label value="@bind(vmsgs['enameEmptyError'])" style="color: red;" />
+						<label value="@bind(vmsgs['enameFormatError'])" style="color: red;" />
+					</cell>
+				</row>
+				<row>
+					<cell>職位：</cell>
+					<cell>
+						<textbox value="@bind(fx.job)" />
+						<label value="@bind(vmsgs['jobEmptyError'])" style="color: red;" />
+						<label value="@bind(vmsgs['jobLengthError'])" style="color: red;" />
+					</cell>
+				</row>
+				<row>
+					<cell>雇用日期：</cell>
+					<cell>
+						<datebox value="@bind(fx.hiredate)"
+							format="yyyy-MM-dd" constraint="no future" readonly="true"/>
+					</cell>
+				</row>
+				<row>
+					<cell>薪水：</cell>
+					<cell>
+						<doublebox value="@bind(fx.sal)" />
+						<label value="@bind(vmsgs['salEmptyError'])" style="color: red;" />
+						<label value="@bind(vmsgs['salFormatError'])" style="color: red;" />
+					</cell>
+				</row>
+				<row>
+					<cell>獎金：</cell>
+					<cell>
+						<doublebox value="@bind(fx.comm)" />
+						<label value="@bind(vmsgs['commEmptyError'])" style="color: red;" />
+						<label value="@bind(vmsgs['commFormatError'])" style="color: red;" />
+					</cell>
+				</row>
+				<row>
+					<cell>部門：</cell>
+					<cell>
+						<listbox mold="select"
+							model="@load(vm.deptList)" selectedItem="@bind(vm.deptVO)">
+							<template name="model">
+								<listitem>
+									<listcell label="@load(each.dname)" />
+								</listitem>
+							</template>
+						</listbox>
+
+					</cell>
+				</row>
+			</rows>
+		</grid>
+		<space/>
+		<hlayout>
+			<button onClick="@command('submit',deptno=vm.deptVO.deptno)" label="送出新增"/>
+		</hlayout>	
+
+	</div>
+</zk>

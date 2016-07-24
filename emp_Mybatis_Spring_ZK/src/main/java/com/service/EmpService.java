@@ -3,6 +3,7 @@ package com.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.dao.EmpDAO;
@@ -10,10 +11,11 @@ import com.dao.EmpDAO_interface;
 import com.domain.Emp2VO;
 import com.domain.EmpVO;
 
-@Service
+@Service("empService")
 public class EmpService {
 
 	@Autowired
+	@Qualifier("empDAO")
 	private EmpDAO_interface dao;
 
 
@@ -69,7 +71,12 @@ public class EmpService {
 	}
 
 	public List<Emp2VO> getAll() {
-		System.out.println(dao);
+		System.out.println("dao="+dao);
 		return dao.getAll();
+	}
+	
+	public List<Emp2VO> getAllByPage(Integer offset,Integer limit) {
+		System.out.println("dao="+dao);
+		return dao.getAllByPage(offset, limit);
 	}
 }

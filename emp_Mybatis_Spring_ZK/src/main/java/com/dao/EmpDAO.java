@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.domain.Emp2VO;
@@ -15,9 +16,10 @@ import com.domain.EmpVO;
 import com.mapper.EmpMapper;
 
 @Repository
+@Qualifier("empDAO")
 public class EmpDAO implements EmpDAO_interface {
 	
-	@Resource
+	@Autowired
 	private EmpMapper empMapper;
 	
 
@@ -44,9 +46,18 @@ public class EmpDAO implements EmpDAO_interface {
 
 	@Override
 	public List<Emp2VO> getAll() {
-		System.out.println(empMapper);
+		System.out.println("empMapper="+empMapper);
 		List<Emp2VO> list = new ArrayList<Emp2VO>();
 		list = empMapper.getAll();
 		return list;
 	}
+
+	@Override
+	public List<Emp2VO> getAllByPage(Integer offset, Integer limit) {
+		List<Emp2VO> list = new ArrayList<Emp2VO>();
+		list = empMapper.getAllByPage(offset, limit);
+		return list;
+	}
+	
+	
 }

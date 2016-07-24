@@ -5,17 +5,10 @@
 	xmlns:w="http://www.zkoss.org/2005/zk/client"
 	xmlns:n="http://www.zkoss.org/2005/zk/native"
 	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
-	<style>
-		.z-row:hover > .z-row-inner, .z-row:hover > .z-cell
-		{background:white; !important}
-
-	</style>
-	<div apply="org.zkoss.bind.BindComposer"
-		viewModel="@id('spvm') @init('com.viewmodel.SelectpageVM')"
-		validationMessages="@id('vmsgs')">
+	<div apply="org.zkoss.bind.BindComposer" viewModel="@id('spvm') @init('com.viewmodel.SelectpageVM')">
 		<grid width="400px">
 			<columns>
-				<column />
+				<column/>
 			</columns>
 			<rows>
 				<row style="background-color:#CCCCFF" align='center'
@@ -42,42 +35,30 @@
 			<space />
 			<h:li>
 				<n:font style="font-size:12pt">輸入員工編號(如7001)：</n:font>
-				<intbox
-					value="@load(spvm.empno) @save(spvm.empno,before='showoneempbyinput') @validator(spvm.empnoValidator)"  />
-				<button label="送出"
-					onClick="@command('showoneempbyinput')" />
-				<label value="@bind(vmsgs['empnoEmptyError'])"
-					style="color: red;" />
-				<label value="@bind(vmsgs['empnoFormatError'])"
-					style="color: red;" />
+				<textbox value="@bind(spvm.empno)"/>
+				<button label="送出" onClick="@command('showoneemp',empno=spvm.empno,type='no')" />
 			</h:li>
 			<h:li>
 				<n:font style="font-size:12pt">選擇員工編號：</n:font>
-				<listbox mold="select" model="@load(spvm.empList1)"
-					selectedItem="@bind(spvm.select_emp)">
+				<listbox mold="select" model="@load(spvm.empList1)" selectedItem="@bind(spvm.select_emp)">
 					<template name="model" var="item">
-						<listitem
-							selected="@load(itemStatus.index eq 0?true:'')">
+						<listitem selected="@load(itemStatus.index eq 0?true:'')">
 							<listcell label="@load(item.empno)" />
 						</listitem>
 					</template>
 				</listbox>
-				<button label="送出"
-					onClick="@command('showoneemp',empno=spvm.select_emp.empno,type='no')" />
+				<button label="送出" onClick="@command('showoneemp',empno=spvm.select_emp.empno,type='no')"/>
 			</h:li>
 			<h:li>
 				<n:font style="font-size:12pt">選擇員工姓名：</n:font>
-				<listbox mold="select" model="@load(spvm.empList2)"
-					selectedItem="@bind(spvm.select_emp_name)">
+					<listbox mold="select" model="@load(spvm.empList2)" selectedItem="@bind(spvm.select_emp_name)">
 					<template name="model">
-						<listitem
-							selected="@load(forEachStatus.index eq 0?true:'')">
+						<listitem selected="@load(forEachStatus.index eq 0?true:'')">
 							<listcell label="@load(each.ename)" />
 						</listitem>
 					</template>
 				</listbox>
-				<button label="送出"
-					onClick="@command('showoneemp',empno=spvm.select_emp_name.empno,type='name')" />
+				<button label="送出" onClick="@command('showoneemp',empno=spvm.select_emp_name.empno,type='name')" />
 			</h:li>
 		</h:ul>
 		<n:h3>員工管理</n:h3>
