@@ -79,7 +79,6 @@ public class SelectpageVM {
 	public void showoneemp(@BindingParam("empno") Integer empno,@BindingParam("type") String type){
 		if("no".equals(type)) {
 			select_emp = empService.getOneEmp(empno);
-			System.out.println(empno);
 			Sessions.getCurrent().setAttribute("empVO", select_emp);
 		} else if("name".equals(type)) {
 			select_emp_name = empService.getOneEmp(empno);
@@ -99,7 +98,6 @@ public class SelectpageVM {
 		return new AbstractValidator() {
 			public void validate(ValidationContext ctx) {
 				Integer empno = (Integer)ctx.getProperties("empno")[0].getValue();
-				System.out.println(empno);
 				if(null == empno) {
 					addInvalidMessage(ctx, "empnoEmptyError", "請輸入員工編號");
 				} else if(empno < 1000 || empno > 9999) {
@@ -108,6 +106,4 @@ public class SelectpageVM {
 			}
 		};
 	}
-	
-
 }

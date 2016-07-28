@@ -89,7 +89,6 @@ public class AddempVM {
 				String ename = (String)ctx.getProperties("ename")[0].getValue();
 				String job = (String)ctx.getProperties("job")[0].getValue();
 				Double sal = (Double)ctx.getProperties("sal")[0].getValue();
-				System.out.println(sal);
 				Double comm = (Double)ctx.getProperties("comm")[0].getValue();
 				String regex = "^[\u4e00-\u9fa5_a-zA-Z0-9]+$";
 				if(null == ename || ename.trim().isEmpty()) {
@@ -115,7 +114,4 @@ public class AddempVM {
 			}
 		};
 	}
-	
-	
-
 }

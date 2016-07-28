@@ -43,7 +43,7 @@
 			<h:li>
 				<n:font style="font-size:12pt">輸入員工編號(如7001)：</n:font>
 				<intbox
-					value="@load(spvm.empno) @save(spvm.empno,before='showoneempbyinput') @validator(spvm.empnoValidator)"  />
+					value="@load(spvm.empno) @save(spvm.empno,before='showoneempbyinput') @validator(spvm.empnoValidator)" popup="false" />
 				<button label="送出"
 					onClick="@command('showoneempbyinput')" />
 				<label value="@bind(vmsgs['empnoEmptyError'])"
